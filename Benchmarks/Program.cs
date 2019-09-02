@@ -112,6 +112,27 @@ namespace Benchmarks
             entities.pos.SseAdd(entities.v);
         }
 
+        [Benchmark]
+        public void Clamp()
+        {
+            entities.pos.Clamp(0.5f);
+        }
+
+        [Benchmark]
+        public void SseClamp()
+        {
+            entities.pos.SseClamp(0.5f);
+        }
+
+        [Benchmark]
+        public void AvxClamp()
+        {
+            entities.pos.AvxClamp(0.5f);
+        }
+
+
+
+
         static void Main(string[] args)
         {
             var summary = BenchmarkRunner.Run<BenchmarksSOA>();
