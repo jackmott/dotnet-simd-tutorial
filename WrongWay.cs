@@ -57,7 +57,7 @@ namespace SIMDTutorial
             var a = Vector128.Create(this.x, this.y, this.z, 0.0f);
             var b = Vector128.Create(v.x, v.y, v.z, 0.0f);
 
-            var result = Sse2.Add(a, b);
+            var result = Sse.Add(a, b);
                        
             
             this.x = result.GetElement(0); //This would be reversed if addressing memory directly
@@ -67,7 +67,7 @@ namespace SIMDTutorial
 
         public void SSE_Norm()
         {
-            //no good waay to do this!
+            //no good way to do this!
 
         }
     }
