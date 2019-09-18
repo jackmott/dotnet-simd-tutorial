@@ -54,20 +54,12 @@ namespace SIMDTutorial
 
         public void SseAdd(Vector3 v)
         {
-            var a = Vector128.Create(this.x, this.y, this.z, 0.0f);
-            var b = Vector128.Create(v.x, v.y, v.z, 0.0f);
-
-            var result = Sse.Add(a, b);
-                       
-            
-            this.x = result.GetElement(0); //This would be reversed if addressing memory directly
-            this.y = result.GetElement(1);
-            this.z = result.GetElement(2);
+           //todo
         }
 
         public void SSE_Norm()
         {
-            //no good way to do this!
+            //todo
 
         }
     }

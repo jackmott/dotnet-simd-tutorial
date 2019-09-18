@@ -46,6 +46,7 @@ namespace Benchmarks
             }
         }
 
+        /*
         [Benchmark]
         public void SseMoveEntities()
         {
@@ -53,7 +54,7 @@ namespace Benchmarks
             {
                 e.pos.SseAdd(e.v);
             }
-        }
+        }*/
 
     }
 
@@ -106,6 +107,7 @@ namespace Benchmarks
             entities.pos.Add(entities.v);
         }
 
+        /*
         [Benchmark]
         public void SseMoveEntities()
         {
@@ -130,12 +132,12 @@ namespace Benchmarks
             entities.pos.AvxClamp(0.5f);
         }
 
-
+    */
 
 
         static void Main(string[] args)
         {
-            var summary = BenchmarkRunner.Run<BenchmarksSOA>();
+            var summary = BenchmarkRunner.Run<Benchmarks>();
             Console.ReadLine();
         }
     }

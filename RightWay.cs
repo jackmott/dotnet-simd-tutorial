@@ -43,34 +43,7 @@ namespace SIMDTutorial
 
         public void SseAdd(Vectors3 v)
         {
-            unsafe
-            {
-                fixed (float*
-                    axPtr = &this.x[0],
-                    ayPtr = &this.y[0],
-                    azPtr = &this.z[0],
-                    bxPtr = &v.x[0],
-                    byPtr = &v.y[0],
-                    bzPtr = &v.z[0])
-                {
-                    for (int i = 0; i < this.x.Length; i = i + 4)
-                    {
-                        var ax = Sse.LoadVector128(&axPtr[i]);
-                        var ay = Sse.LoadVector128(&ayPtr[i]);
-                        var az = Sse.LoadVector128(&azPtr[i]);
-
-                        var bx = Sse.LoadVector128(&bxPtr[i]);
-                        var by = Sse.LoadVector128(&byPtr[i]);
-                        var bz = Sse.LoadVector128(&bzPtr[i]);
-
-                        Sse.Store(&axPtr[i], Sse.Add(ax, bx));
-                        Sse.Store(&ayPtr[i], Sse.Add(ay, by));
-                        Sse.Store(&azPtr[i], Sse.Add(az, bz));
-
-                    }
-
-                }
-            }
+           //todo
         }
 
 
@@ -88,28 +61,7 @@ namespace SIMDTutorial
         public void SseNorm()
         {
 
-            unsafe
-            {
-                fixed (float*
-                    axPtr = &this.x[0],
-                    ayPtr = &this.y[0],
-                    azPtr = &this.z[0])
-                {
-                    for (int i = 0; i < this.x.Length; i = i + 4)
-                    {
-                        var ax = Sse.LoadVector128(&axPtr[i]);
-                        var ay = Sse.LoadVector128(&ayPtr[i]);
-                        var az = Sse.LoadVector128(&azPtr[i]);
-
-                        // len = 1/sqrt(x*x+y*y+z*z)
-                        var len = Sse.ReciprocalSqrt(Sse.Add(Sse.Add(Sse.Multiply(ax, ax), Sse.Multiply(ay, ay)), Sse.Multiply(az, az)));
-
-                        Sse.Store(&axPtr[i], Sse.Multiply(ax, len));
-                        Sse.Store(&ayPtr[i], Sse.Multiply(ay, len));
-                        Sse.Store(&azPtr[i], Sse.Multiply(az, len));
-                    }
-                }
-            }
+            //todo
 
         }
 
@@ -130,67 +82,12 @@ namespace SIMDTutorial
 
         public void SseClamp(float min)
         {
-            var trueResult = Vector128.Create(min);
-            var falseResult = Vector128.Create(1.0f);
-
-            unsafe
-            {
-                fixed (float*
-                    axPtr = &this.x[0],
-                    ayPtr = &this.y[0],
-                    azPtr = &this.z[0])
-                {
-                    for (int i = 0; i < this.x.Length; i = i + 4)
-                    {
-                        var ax = Sse.LoadVector128(&axPtr[i]);
-                        var ay = Sse.LoadVector128(&ayPtr[i]);
-                        var az = Sse.LoadVector128(&azPtr[i]);
-
-
-                        // len = sqrt(x*x+y*y+z*z)
-                        var len = Sse.Sqrt(Sse.Add(Sse.Add(Sse.Multiply(ax, ax), Sse.Multiply(ay, ay)), Sse.Multiply(az, az)));
-                        var mask = Sse.CompareLessThan(len, trueResult);
-                        var result = Sse.Or(Sse.And(mask, trueResult), Sse.AndNot(mask, falseResult));
-
-                        Sse.Store(&axPtr[i], Sse.Multiply(Sse.Divide(ax, len), result));
-                        Sse.Store(&ayPtr[i], Sse.Multiply(Sse.Divide(ay, len), result));
-                        Sse.Store(&azPtr[i], Sse.Multiply(Sse.Divide(az, len), result));
-                    }
-
-                }
-            }
+            //todo
         }
 
         public void AvxClamp(float min)
         {
-            var trueResult = Vector256.Create(min);
-            var falseResult = Vector256.Create(1.0f);
-
-            unsafe
-            {
-                fixed (float*
-                    axPtr = &this.x[0],
-                    ayPtr = &this.y[0],
-                    azPtr = &this.z[0])
-                {
-                    for (int i = 0; i < this.x.Length; i = i + 8)
-                    {
-                        var ax = Avx.LoadVector256(&axPtr[i]);
-                        var ay = Avx.LoadVector256(&ayPtr[i]);
-                        var az = Avx.LoadVector256(&azPtr[i]);
-
-                        // len = sqrt(x*x+y*y+z*z)
-                        var len = Avx.Sqrt(Avx.Add(Avx.Add(Avx.Multiply(ax, ax), Avx.Multiply(ay, ay)), Avx.Multiply(az, az)));
-                        Vector256<float> mask = Avx.Compare(len, trueResult, FloatComparisonMode.OrderedLessThanSignaling);
-                        var result = Avx.BlendVariable(falseResult, trueResult, mask);
-
-                        Avx.Store(&axPtr[i], Avx.Multiply(Avx.Divide(ax, len), result));
-                        Avx.Store(&ayPtr[i], Avx.Multiply(Avx.Divide(ay, len), result));
-                        Avx.Store(&azPtr[i], Avx.Multiply(Avx.Divide(az, len), result));
-
-                    }
-                }
-            }
+            // todo!
         }
     }
     public struct Entities
