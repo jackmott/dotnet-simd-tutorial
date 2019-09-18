@@ -29,6 +29,7 @@ namespace SIMDTutorial
         public float x;
         public float y;
         public float z;
+        
 
         public Vector3(float x, float y, float z)
         {
@@ -54,12 +55,12 @@ namespace SIMDTutorial
 
         public void SseAdd(Vector3 v)
         {
-           //todo
+           //todo     
         }
 
         public void SSE_Norm()
         {
-            //todo
+            
 
         }
     }

@@ -1,8 +1,9 @@
 ﻿using System;
 using SIMDTutorial;
-
+using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
+using BenchmarkDotNet.Jobs;
 
 namespace Benchmarks
 {
@@ -46,7 +47,7 @@ namespace Benchmarks
             }
         }
 
-        /*
+        
         [Benchmark]
         public void SseMoveEntities()
         {
@@ -54,7 +55,7 @@ namespace Benchmarks
             {
                 e.pos.SseAdd(e.v);
             }
-        }*/
+        }
 
     }
 
@@ -100,20 +101,33 @@ namespace Benchmarks
 
         }
 
-
+        
         [Benchmark]
         public void MoveEntities()
         {
             entities.pos.Add(entities.v);
         }
 
-        /*
+        
         [Benchmark]
         public void SseMoveEntities()
         {
             entities.pos.SseAdd(entities.v);
         }
 
+        /*
+        [Benchmark]
+        public void Norm()
+        {
+            entities.pos.Norm();
+        }
+
+        [Benchmark]
+        public void SseNorm()
+        {
+            entities.pos.SseNorm();
+        }
+        
         [Benchmark]
         public void Clamp()
         {
@@ -125,6 +139,7 @@ namespace Benchmarks
         {
             entities.pos.SseClamp(0.5f);
         }
+        
 
         [Benchmark]
         public void AvxClamp()
@@ -137,8 +152,10 @@ namespace Benchmarks
 
         static void Main(string[] args)
         {
-            var summary = BenchmarkRunner.Run<Benchmarks>();
-            Console.ReadLine();
+            var summary = BenchmarkRunner.Run<Benchmarks>(
+                ManualConfig.Create(DefaultConfig.Instance).With(Job.ShortRun)
+                );
+            
         }
     }
 

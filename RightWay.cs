@@ -43,7 +43,7 @@ namespace SIMDTutorial
 
         public void SseAdd(Vectors3 v)
         {
-           //todo
+           //tod
         }
 
 
@@ -60,9 +60,7 @@ namespace SIMDTutorial
 
         public void SseNorm()
         {
-
-            //todo
-
+          //todo
         }
 
         public void Clamp(float min)
@@ -87,7 +85,7 @@ namespace SIMDTutorial
 
         public void AvxClamp(float min)
         {
-            // todo!
+           //todo
         }
     }
     public struct Entities
