@@ -115,7 +115,7 @@ namespace Benchmarks
             entities.pos.SseAdd(entities.v);
         }
 
-        /*
+        
         [Benchmark]
         public void Norm()
         {
@@ -147,7 +147,7 @@ namespace Benchmarks
             entities.pos.AvxClamp(0.5f);
         }
 
-    */
+    
 
 
         static void Main(string[] args)
